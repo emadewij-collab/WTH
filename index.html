@@ -291,7 +291,7 @@
     <!-- Footer -->
     <footer class="w-full py-6 px-6 text-center text-xs opacity-50 border-t border-current/5 mt-auto">
         <div class="max-w-4xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
-            <p>© ۱۴۰۳ - برف کو</p>
+            <p>© ۱۴۰۴ - برف کو | نسخه ۲ (پاییز)</p>
             <a href="https://github.com/emadewij-collab/snowf" target="_blank" class="flex items-center gap-2 hover:opacity-100 transition-opacity">
                 <i data-lucide="github" class="w-3 h-3"></i>
                 <span>emadewij-collab/snowf</span>
@@ -430,38 +430,11 @@
                 windRec = "خطرناک، احتمال توقف تله‌کابین";
             }
 
-            // Checklist Generation (HTML)
-            const checklistHTML = `
-                <div style="font-family: 'Vazirmatn', sans-serif; direction: rtl; text-align: right; padding: 20px; border: 2px solid #000;">
-                    <h1 style="text-align: center; margin-bottom: 5px;">چک‌لیست ایمنی اسکی - برف‌کو</h1>
-                    <p style="text-align: center; font-size: 12px; color: #555;">تاریخ: ${new Date().toLocaleDateString('fa-IR')}</p>
-                    <div style="border-bottom: 1px dashed #000; margin: 10px 0;"></div>
-                    
-                    <div style="background: #eee; padding: 10px; border-radius: 5px; margin-bottom: 15px;">
-                        <strong>وضعیت: ${decision}</strong><br/>
-                        <small>علت: ${reasons.length ? reasons.join('، ') : 'پایدار'}</small>
-                    </div>
-
-                    <h3 style="font-size: 14px; border-bottom: 2px solid #000; display: inline-block;">۱. تجهیزات ضروری</h3>
-                    <ul style="list-style: none; padding: 0;">
-                        <li style="margin: 5px 0;">▢ کلاه ایمنی (Helmet) <small>- ${wind > 30 ? 'حتما بررسی شود (باد زیاد)' : 'الزامی'}</small></li>
-                        <li style="margin: 5px 0;">▢ عینک اسکی <small>- پیشنهاد: ${lensRec}</small></li>
-                        <li style="margin: 5px 0;">▢ ضدآفتاب ${isDay && cloud < 50 ? '(ضروری: آفتاب)' : ''}</li>
-                        <li style="margin: 5px 0;">▢ لباس لایه‌ای ${temp < -5 ? '(بسیار سرد: ۳ لایه)' : ''}</li>
-                    </ul>
-
-                    <div style="margin-top: 20px; font-size: 11px; text-align: center;">
-                        ایمنی شما در اولویت است. همیشه پیش از خروج شماره امداد پیست را ذخیره کنید.
-                    </div>
-                </div>
-            `;
-
             return {
                 decision,
                 reasons,
                 statusClass,
                 icon,
-                checklistHTML,
                 windChill: calculateWindChill(temp, wind),
                 logic: {
                     lens: { condition: uvCondition, rec: lensRec },
@@ -470,17 +443,7 @@
             };
         }
 
-        function printChecklist(htmlContent) {
-            const printWindow = window.open('', '', 'height=600,width=400');
-            printWindow.document.write('<html><head><title>Checklist</title>');
-            printWindow.document.write('<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;700&display=swap" rel="stylesheet">');
-            printWindow.document.write('</head><body>');
-            printWindow.document.write(htmlContent);
-            printWindow.document.write('</body></html>');
-            printWindow.document.close();
-            printWindow.focus();
-            setTimeout(() => { printWindow.print(); }, 1000);
-        }
+
 
         // --- API & Rendering ---
 
